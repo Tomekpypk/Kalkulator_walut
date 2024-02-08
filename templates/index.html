@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator Walut</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+<body>
+    <h1>Kalkulator Walut</h1>
+    
+    <form method="post">
+        <label for="currency">Wybierz walutę:</label>
+        <select name="currency" id="currency">
+            {% for rate in rates %}
+                <option value="{{ rate.code }}">{{ rate.currency }} ({{ rate.code }})</option>
+            {% endfor %}
+        </select>
+
+        <label for="amount">Podaj ilość:</label>
+        <input type="number" name="amount" id="amount" step="0.01" required>
+
+        <button type="submit">Przelicz</button>
+    </form>
+
+    {% if cost_in_pln is not none %}
+        <p>Koszt w PLN: {{ cost_in_pln }}</p>
+    {% endif %}
+</body>
+</html>
